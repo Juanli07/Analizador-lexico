@@ -62,6 +62,9 @@ function lexer(code){
             results.push({lexeme: element, token: 'ERLX'});
         }
     });
+    tokens.forEach( item => {
+        item.cont = 0;
+    })
     return results
 }
 

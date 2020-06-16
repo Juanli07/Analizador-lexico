@@ -1,4 +1,5 @@
 let editor, semantic;
+let txt;
 $(document).ready( () => {
     editor = CodeMirror.fromTextArea(document.getElementById('code'), {
         lineNumbers: true,
@@ -8,7 +9,7 @@ $(document).ready( () => {
       lineNumbers: true,
       readOnly: false
     });
-    semantic.setSize(null, 100);
+    semantic.setSize(null, 140);
     particlesJS("particle-container", {
         "particles": {
           "number": {
@@ -141,9 +142,43 @@ function set(){
       toastr.warning('Aun no haz escrito nada...')
     }
     let tok = checksemantic(lexemas);
-    let txt = ''
+    txt = ''
     tok.forEach( item => {
       txt += item+'\n';
     })
     semantic.setValue(txt);
+}
+
+function descargarArchivo(contenidoEnBlob, nombreArchivo) {
+  var reader = new FileReader();
+  reader.onload = function (event) {
+      var save = document.createElement('a');
+      save.href = event.target.result;
+      save.target = '_blank';
+      save.download = nombreArchivo || 'archivo.dat';
+      var clicEvent = new MouseEvent('click', {
+          'view': window,
+              'bubbles': true,
+              'cancelable': true
+      });
+      save.dispatchEvent(clicEvent);
+      (window.URL || window.webkitURL).revokeObjectURL(save.href);
+  };
+  reader.readAsDataURL(contenidoEnBlob);
+};
+
+
+function generarTexto(datos) {
+  datos = datos.split('\n');
+  let texto = [];
+  datos.forEach(item => {
+    texto.push(item+'\n');
+  })
+  return new Blob(texto, {
+      type: 'text/plain'
+  });
+};
+
+function descargar(){
+  descargarArchivo(generarTexto(txt), 'tokens.txt');
 }
