@@ -3,7 +3,7 @@ let txt;
 $(document).ready( () => {
     editor = CodeMirror.fromTextArea(document.getElementById('code'), {
         lineNumbers: true,
-        mode: 'javascript'
+        mode: 'c',
     });
     semantic = CodeMirror.fromTextArea(document.getElementById('tokens'), {
       lineNumbers: true,

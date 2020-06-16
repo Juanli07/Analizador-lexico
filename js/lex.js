@@ -27,6 +27,7 @@ let tokens = [{
     expr: /[\,]/,
     cont: 0
 }]
+let errors = [/^[\W][\w]*\+|\-|\*|\//]
 let semantica = [{
     expr: /(TD[\d]*[\s]ID[\d]*[\s]DELIM[\d]*[\s](TD[\d]*[\s]ID[\d]*[\s](MIS[\d]*[\s]TD[\d]*[\s]ID[\d]*[\s])*)?DELIM[\d]*)/
 },{
@@ -49,6 +50,11 @@ function lexer(code){
     lexemes.push(word);
     let band = true;
     lexemes.forEach(element => {
+        for(let err in errors){
+            if(element.match(errors[err] && element.lenght > 1)){
+                console.log(element)
+            }
+        }
         band = false;
         for(let token in tokens){
             if(element.match(tokens[token].expr) && element != '\n'){
