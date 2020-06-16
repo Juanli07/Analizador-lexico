@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizador lexico</title>
+    <!-- bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- toastr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" integrity="sha256-ENFZrbVzylNbgnXx0n3I1g//2WeO47XxoPe0vkp3NC8=" crossorigin="anonymous" />
+    <!-- CodeMirror -->
+    <link rel="stylesheet" href="/css/codemirror.css">
+    <script src="/js/codemirror.js"></script>
+    <!-- particulas -->
+    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> 
+    <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+    <!-- index -->
+    <script src="/js/index.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/lex.js"></script>
+
+</head>
+
+<body>
+    <div id="particle-container"></div>
+    <div class="col-xl-10 col-lg-10 mx-auto">
+        <div class="header">
+            <div class="col-lg content-justifi-center">
+                <h1>Analizador lexico</h1>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg">
+                    <textarea name="code" id="code" cols="100" rows="10"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg">
+                    <button class="btn btn-info" onclick="set()">Comprobar</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm">
+                    <h3>Tabla de simbolos</h3>
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th>LEXEMA</th>
+                                <th>TOKEN</th>
+                            </tr>
+                        </thead>
+                        <tbody id="token">
+                           <tr>
+                               <td></td>
+                               <td></td>
+                           </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm">
+                    <h3>Tabla de errores</h3>
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th>LEXEMA</th>
+                                <th>TOKEN ERROR</th>
+                                <th>LINEA</th>
+                            </tr>
+                        </thead>
+                        <tbody id="token">
+                           <tr>
+                               <td></td>
+                               <td></td>
+                           </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm">
+                    <h3>TOKENS</h3>
+                    <textarea name="" id="tokens" disabled></textarea>
+                    <a href="">Descargar .txt</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
