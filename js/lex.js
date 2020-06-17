@@ -1,6 +1,6 @@
 let tokens = [{
     token: 'TD', 
-    expr: /Void|Int|Double|Float|String|Char/,
+    expr: /void|int|double|float|string|char/,
     cont: 0
 },{
     token: 'ID',
@@ -8,7 +8,7 @@ let tokens = [{
     cont: 0
 },{
     token: 'DELIM',
-    expr: /\{|\}|\(|\)/,
+    expr: /\(|\)/,
     cont: 0
 },{
     token: 'AS',
@@ -51,7 +51,7 @@ function lexer(code){
     let band = true;
     lexemes.forEach(element => {
         for(let err in errors){
-            if(element.match(errors[err] && element.lenght > 1)){
+            if(element.match(errors[err]) && element.lenght > 1){
                 console.log(element)
             }
         }

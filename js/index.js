@@ -1,15 +1,15 @@
-let editor, semantic;
+let editor;
 let txt;
 $(document).ready( () => {
     editor = CodeMirror.fromTextArea(document.getElementById('code'), {
         lineNumbers: true,
         mode: 'c',
     });
-    semantic = CodeMirror.fromTextArea(document.getElementById('tokens'), {
+    contentSemantic = CodeMirror.fromTextArea(document.getElementById('tokens'), {
       lineNumbers: true,
       readOnly: false
     });
-    semantic.setSize(null, 140);
+    contentSemantic.setSize(null, 140);
     particlesJS("particle-container", {
         "particles": {
           "number": {
@@ -126,12 +126,12 @@ $(document).ready( () => {
           "background_size": "cover"
         }
       });
-      editor.setValue(`Void a(Int b, Int c)
+      editor.setValue(`void a(int b, int c)
       b = b + c`);
 })
 
 function set(){
-    let lexemas = lexer(editor.getValue())
+    let lexemas = setTokens(setLexemes(editor.getValue()));
     if(lexemas.length > 0){
       let rows = '';
       lexemas.forEach( item => {
@@ -141,12 +141,11 @@ function set(){
     }else{
       toastr.warning('Aun no haz escrito nada...')
     }
-    let tok = checksemantic(lexemas);
     txt = ''
-    tok.forEach( item => {
-      txt += item+'\n';
+    lexemas.forEach( item => {
+      txt += item.token+'\n';
     })
-    semantic.setValue(txt);
+    contentSemantic.setValue(txt);
 }
 
 function descargarArchivo(contenidoEnBlob, nombreArchivo) {
