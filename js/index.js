@@ -126,24 +126,40 @@ $(document).ready( () => {
           "background_size": "cover"
         }
       });
-      editor.setValue(`void a(int b, int c)
-      b = b + c`);
+      editor.setValue(`void abc()\n\ta = ab + 1 + bb\nvo2id int(int a)\n\ta = ab + 1 / 2 * 4\nvoid abc(int a, int b, int a)\n\ta = b + c /* d`);
+      set()
 })
 
 function set(){
     let lexemas = setTokens(setLexemes(editor.getValue()));
     if(lexemas.length > 0){
       let rows = '';
+      let rowse = ''
+      let linea = 1;
       lexemas.forEach( item => {
-          rows += `<tr><td>${item.lexeme}</td><td>${item.token}</tr>`;
+          
+          if(item.token.substring(0, 4) !== 'ERLX'){
+            rows += `<tr><td>${item.lexeme}</td><td>${item.token}</td></tr>`;
+          }else{
+            rowse += `<tr><td>${item.lexeme}</td><td>${item.token}</td><td>${linea}</td><td>${item.err}</td></tr>`;
+          }
+          if(item.token == '\n'){
+            linea++;
+          }
+          
       })
       $('#token').html(rows);
+      $('#tokenerr').html(rowse);
     }else{
       toastr.warning('Aun no haz escrito nada...')
     }
     txt = ''
     lexemas.forEach( item => {
-      txt += item.token+'\n';
+      if(item.token != '\n'){
+        txt += item.token+' ';
+      }else{
+        txt += '\n';
+      }
     })
     contentSemantic.setValue(txt);
 }
