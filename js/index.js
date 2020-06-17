@@ -126,7 +126,7 @@ $(document).ready( () => {
           "background_size": "cover"
         }
       });
-      editor.setValue(`void abc()\n\ta = ab + 1 + bb\nvo2id int(int a)\n\ta = ab + 1 / 2 * 4\nvoid abc(int a, int b, int a)\n\ta = b + c /* d`);
+      editor.setValue(`void abc()\n\ta = ab + 1 + bb;\nvo2id int(int a)\n\ta = ab + 1 / 2 * 4;\nvoid abc(int a, int b, int a)\n\ta = b + c /* d;`);
       set()
 })
 

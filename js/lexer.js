@@ -30,7 +30,7 @@ let tokens = [{
     err: 'Invalid number'
 },{
     token: 'MIS',
-    expr: /[\,]/,
+    expr: /^[\,|\;]$/,
     cont: 0,
     err: 'Miscellaneous error'
 }]
@@ -41,7 +41,7 @@ const semantic = [
         id: 'function'
     },
     {
-        expr: /([A-Za-z0-9!"#$%&/_()¡¿?]+[\s]*[\=]([\s]*[A-Za-z0-9!"#$%&/_()¡¿?]+([\s]*[\/\-\+\%\*][\s]*[A-Za-z0-9!"#$%&/_()¡¿?]+)*)+)/,
+        expr: /([A-Za-z0-9!"#$%&/_()¡¿?]+[\s]*[\=]([\s]*[A-Za-z0-9!"#$%&/_()¡¿?]+([\s]*[\/\-\+\%\*][\s]*[A-Za-z0-9!"#$%&/_()¡¿?]+)*)+[\s]*[\;])/,
         id: 'operation'
     }
 ]
@@ -55,7 +55,6 @@ function setLexemes(code){
             }
         }
     });
-    console.log(results)
     return results
 }
 
@@ -81,7 +80,7 @@ function setTokens(lines){
                 }
             }
             lexemes.push(word);
-            let cont  = 0, band = 0;;
+            let cont  = 0, band = 0;
             lexemes.forEach( lex => {
                 if(lex != '' && lex != ' '){
                     for(tk in tokens){
@@ -157,7 +156,6 @@ function setTokens(lines){
         item.cont = 0;
     })
     lexeme = []
-    console.log(results)
     return results;
 }
 
@@ -211,15 +209,16 @@ function getTokensOpe(arr){
     let position = ['ID', 'AS', 'X']
     let num = 0;
     for(let i in lexemes){
-        if(lexemes[i] != ' ' && lexemes[i] != ''){
+        if(lexemes[i] != ' ' && lexemes[i] != '' && lexemes[i] != '\t'){
             num++;
         }
     }
-    num -= 3;
+    num -= 4;
     while( num > 0){
         position.push('OA');
         position.push('X');
         num -= 2;
     }
+    position.push('MIS');
     return position;
 }
