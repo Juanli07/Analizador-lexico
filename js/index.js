@@ -133,6 +133,7 @@ $(document).ready( () => {
 
 function set(){
     let lexemas = setTokens(setLexemes(editor.getValue()));
+    results = [];
     if(lexemas.length > 0){
       let rows = '';
       let rowse = ''
