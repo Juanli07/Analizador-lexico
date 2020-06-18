@@ -30,8 +30,11 @@
     <div id="particle-container"></div>
     <div class="col-xl-10 col-lg-10 mx-auto">
         <div class="header">
-            <div class="col-lg content-justifi-center">
-                <h1>Analizador lexico</h1>
+            <h1 class="title">Analizador léxico</h1>
+            <div class="text">
+                <h3>Funciones y expresiones aritméticas</h3>
+                <strong>Funciones</strong> con o sin retorno(void, string, int, float, char),
+                <strong>paramétros</strong> con los diferentes tipos de datos, <strong>identificadores</strong> solo pueden iniciar con una letra y se puede usar números; sin el uso de caracteres especiales. No se hace uso de '{}' para delimitar las funciones.
             </div>
         </div>
         <div class="container">
@@ -48,7 +51,7 @@
 
             <div class="row">
                 <div class="col-sm">
-                    <h3>Tabla de simbolos</h3>
+                    <h3 class="title">Tabla de simbolos</h3>
                     <table class="table table-dark">
                         <thead>
                             <tr>
@@ -65,7 +68,7 @@
                     </table>
                 </div>
                 <div class="col-sm">
-                    <h3>Tabla de errores</h3>
+                    <h3 class="title">Tabla de errores</h3>
                     <table class="table table-dark">
                         <thead>
                             <tr>
@@ -84,7 +87,7 @@
                     </table>
                 </div>
                 <div class="col-sm">
-                    <h3>TOKENS</h3>
+                    <h3 class="title">Token</h3>
                     <textarea name="" id="tokens" disabled></textarea>
                     <div class="btn" onclick="descargar()" style="color:blanchedalmond">Descargar</div>
                 </div>

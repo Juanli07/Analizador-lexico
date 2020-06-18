@@ -16,3 +16,22 @@ html, body {
   .row{
     padding: 5px;
   }
+  .header {
+    align-items: center;
+    text-align: center;
+  }
+  .header > .title{
+    color: white;
+    font-style: oblique;
+    background-color: rgba(0, 0, 0, .6);
+    padding: 10px;
+  }
+  .title{
+    color:white;
+    padding:10px;
+  }
+  .text {
+    color: white;
+    background-color: rgba(0, 0, 0, .6);
+    padding: 10px;
+  }

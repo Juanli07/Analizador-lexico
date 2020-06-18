@@ -141,6 +141,7 @@ function set(){
           if(item.token.substring(0, 4) !== 'ERLX'){
             rows += `<tr><td>${item.lexeme}</td><td>${item.token}</td></tr>`;
           }else{
+            rows += `<tr><td>${item.lexeme}</td><td>${item.token}</td></tr>`
             rowse += `<tr><td>${item.lexeme}</td><td>${item.token}</td><td>${linea}</td><td>${item.err}</td></tr>`;
           }
           if(item.token == '\n'){

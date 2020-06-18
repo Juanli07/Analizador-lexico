@@ -1,3 +1,4 @@
+let results = new Array();
 let tokens = [{
     token: 'TD', 
     expr: /void|int|double|float|string|char/,
@@ -34,7 +35,6 @@ let tokens = [{
     cont: 0,
     err: 'Miscellaneous error'
 }]
-
 const semantic = [
     {
         expr: /([A-za-z0-9!"#$%&/_()¡¿?]+[\s][A-za-z0-9!"#$%&/_()¡¿?]+[\s]*[(]([\s]*[A-za-z0-9!"#$%&/_()¡¿?]+[\s][A-za-z0-9!"#$%&/_()¡¿?]+([\,][\s]*[A-za-z0-9!"#$%&/_()¡¿?]+[\s][A-za-z0-9!"#$%&/_()¡¿?]+[\s]*)*)?[\)])/,
@@ -58,11 +58,20 @@ function setLexemes(code){
     return results
 }
 
+function checkExist(lex){
+    let band = false
+    results.forEach( (item, index) => {
+        if(lex == item.lexeme){
+            band = index;
+        }
+    })
+    return band;
+}
+
 function setTokens(lines){
     let lexemes = new Array();
     let word = '';
-    let tok;
-    let results = new Array();
+    let tok, status;
     lines.forEach( item => {
         lexemes = []
         word = ''
@@ -89,12 +98,17 @@ function setTokens(lines){
                             break;
                         }
                     }
-                    if(tokens[band].expr.test(lex)){
-                        tokens[band].cont++;
-                        results.push({lexeme: lex, token: tokens[band].token+tokens[band].cont})
+                    status = checkExist(lex);
+                    if(status){
+                        results.push({lexeme:results[status].lexeme, token: results[status].token});
                     }else{
-                        tokens[band].cont++;
-                        results.push({lexeme: lex, token: 'ERLX'+tokens[band].token+tokens[band].cont, err: tokens[band].err})
+                        if(tokens[band].expr.test(lex)){
+                            tokens[band].cont++;
+                            results.push({lexeme: lex, token: tokens[band].token+tokens[band].cont})
+                        }else{
+                            tokens[band].cont++;
+                            results.push({lexeme: lex, token: 'ERLX'+tokens[band].token+tokens[band].cont, err: tokens[band].err})
+                        }
                     }
                     cont++;
                 }
@@ -123,30 +137,34 @@ function setTokens(lines){
                             break;
                         }
                     }
-                    if(band){
-                        if(tokens[band].expr.test(lex)){
-                            tokens[band].cont++;
-                            results.push({lexeme: lex, token: tokens[band].token+tokens[band].cont})
-                        }else{
-                            tokens[band].cont++;
-                            results.push({lexeme: lex, token: 'ERLX'+tokens[band].token+tokens[band].cont, err: tokens[band].err})
-                        }
-                        cont++;
+                    status = checkExist(lex);
+                    if(status){
+                        results.push({lexeme:results[status].lexeme, token: results[status].token});
                     }else{
-                        if(tokens[1].expr.test(lex)){
-                            band = 1;
-                        }else if(tokens[5].expr.test(lex)){
-                            band = 5;
-                        }
                         if(band){
-                            tokens[1].cont++;
-                            results.push({lexeme: lex, token: tokens[band].token+tokens[band].cont})
+                            if(tokens[band].expr.test(lex)){
+                                tokens[band].cont++;
+                                results.push({lexeme: lex, token: tokens[band].token != 'AS' ? tokens[band].token+tokens[band].cont:tokens[band].token })
+                            }else{
+                                tokens[band].cont++;
+                                results.push({lexeme: lex, token: 'ERLX'+tokens[band].token+tokens[band].cont, err: tokens[band].err})
+                            }
                         }else{
-                            tokens[1].cont++;
-                            results.push({lexeme: lex, token: 'ERLX'+tokens[1].token+tokens[1].cont, err: tokens[1].err})
+                            if(tokens[1].expr.test(lex)){
+                                band = 1;
+                            }else if(tokens[5].expr.test(lex)){
+                                band = 5;
+                            }
+                            if(band){
+                                tokens[band].cont++;
+                                results.push({lexeme: lex, token: tokens[band].token+tokens[band].cont})
+                            }else{
+                                tokens[1].cont++;
+                                results.push({lexeme: lex, token: 'ERLX'+tokens[1].token+tokens[1].cont, err: tokens[1].err})
+                            }
                         }
-                        cont++;
                     }
+                    cont++;
                 }
             })
         }
