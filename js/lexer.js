@@ -6,7 +6,7 @@ let tokens = [{
     err: 'Type error'
 },{
     token: 'ID',
-    expr: /(^[A-Z|a-z][a-zA-Z0-9]*)/,
+    expr: /^((?!int|void|string|char|float|double)[A-Z|a-z][a-zA-Z0-9]*)$/,
     cont: 0,
     err: 'Identifier error'
 },{
@@ -61,7 +61,7 @@ function setLexemes(code){
 function checkExist(lex){
     let band = false
     results.forEach( (item, index) => {
-        if(lex == item.lexeme){
+        if(lex == item.lexeme && item.token.substring(0, 4) !== 'ERLX'){
             band = index;
         }
     })
