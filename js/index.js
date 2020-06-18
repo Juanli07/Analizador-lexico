@@ -127,13 +127,14 @@ $(document).ready( () => {
           "background_size": "cover"
         }
       });
-      editor.setValue(`void abc()\n\ta = ab + 1 + bb;\nvo2id int(int a)\n\ta = ab + 1 / 2 * 4;\nvoid abc(int a, int b, int a)\n\ta = b + c /* d;`);
+      editor.setValue(`void ejemplo()\n\ta = ab + 1 + bb;\nvo2id ejemploerror(in1 a)\n\t9a = 2 * 4;`);
       set()
 })
 
 function set(){
     let lexemas = setTokens(setLexemes(editor.getValue()));
-    results = [];
+    results = [];      
+    
     if(lexemas.length > 0){
       let rows = '';
       let rowse = ''
@@ -148,7 +149,7 @@ function set(){
               rowse += `<tr><td>${item.lexeme}</td><td>${item.token}</td><td>${linea}</td><td>${item.err}</td></tr>`;
               tokenss.push(item.token);
             }
-            if(item.token == '\n'){
+            if (item.token == '\n'){
               linea++;
             }
           }
@@ -172,7 +173,7 @@ function set(){
 }
 function checkrepeat(token){
   let band = true;
-  if(tokenss.length > 0){
+  if (tokenss.length > 0 && token != '\n'){
     tokenss.forEach( index => {
       if( index == token){
         band = false;
