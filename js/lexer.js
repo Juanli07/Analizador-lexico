@@ -78,7 +78,7 @@ function setTokens(lines){
         if(item.type === 'function'){
             tok = getTokensFunc(item.line);
             for(let letter in item.line){
-                if(/[^A-Za-z0-9_.]/.test(item.line[letter])){
+                if(/[^A-Za-z0-9_.&!?¿]/.test(item.line[letter])){
                     lexemes.push(word);
                     lexemes.push(item.line[letter]);
                     word = '';
@@ -181,7 +181,7 @@ function getTokensFunc(arr){
     let lexemes = new Array();
     let word = '';
     for(let letter in arr){
-        if(/[^A-Za-z0-9_.]/.test(arr[letter])){
+        if(/[^A-Za-z0-9_.&!?¿]/.test(arr[letter])){
             lexemes.push(word);
             lexemes.push(arr[letter]);
             word = '';
