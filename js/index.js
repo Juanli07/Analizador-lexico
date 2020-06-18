@@ -1,5 +1,6 @@
 let editor;
 let txt;
+let tokenss = new Array();
 $(document).ready( () => {
     editor = CodeMirror.fromTextArea(document.getElementById('code'), {
         lineNumbers: true,
@@ -137,15 +138,18 @@ function set(){
       let rowse = ''
       let linea = 1;
       lexemas.forEach( item => {
-          
-          if(item.token.substring(0, 4) !== 'ERLX'){
-            rows += `<tr><td>${item.lexeme}</td><td>${item.token}</td></tr>`;
-          }else{
-            rows += `<tr><td>${item.lexeme}</td><td>${item.token}</td></tr>`
-            rowse += `<tr><td>${item.lexeme}</td><td>${item.token}</td><td>${linea}</td><td>${item.err}</td></tr>`;
-          }
-          if(item.token == '\n'){
-            linea++;
+          if(checkrepeat(item.token)){
+            if(item.token.substring(0, 4) !== 'ERLX'){
+              rows += `<tr><td>${item.lexeme}</td><td>${item.token}</td></tr>`;
+              tokenss.push(item.token);
+            }else{
+              rows += `<tr><td>${item.lexeme}</td><td>${item.token}</td></tr>`
+              rowse += `<tr><td>${item.lexeme}</td><td>${item.token}</td><td>${linea}</td><td>${item.err}</td></tr>`;
+              tokenss.push(item.token);
+            }
+            if(item.token == '\n'){
+              linea++;
+            }
           }
           
       })
@@ -155,6 +159,7 @@ function set(){
       toastr.warning('Aun no haz escrito nada...')
     }
     txt = ''
+    tokenss = [];
     lexemas.forEach( item => {
       if(item.token != '\n'){
         txt += item.token+' ';
@@ -164,7 +169,17 @@ function set(){
     })
     contentSemantic.setValue(txt);
 }
-
+function checkrepeat(token){
+  let band = true;
+  if(tokenss.length > 0){
+    tokenss.forEach( index => {
+      if( index == token){
+        band = false;
+      }
+    })
+  }
+  return band;
+}
 function descargarArchivo(contenidoEnBlob, nombreArchivo) {
   var reader = new FileReader();
   reader.onload = function (event) {
