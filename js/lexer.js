@@ -55,6 +55,7 @@ function setLexemes(code){
             }
         }
     });
+        
     return results
 }
 

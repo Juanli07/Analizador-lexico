@@ -34,7 +34,7 @@
             <div class="text">
                 <h3>Funciones y expresiones aritméticas</h3>
                 <strong>Funciones</strong> con o sin retorno(void, string, int, float, char),
-                <strong>paramétros</strong> con los diferentes tipos de datos, <strong>identificadores</strong> solo pueden iniciar con una letra y se puede usar números; sin el uso de caracteres especiales. No se hace uso de '{}' para delimitar las funciones.
+                <strong>paramétros</strong> con los diferentes tipos de datos, <strong>identificadores</strong> solo pueden iniciar con una letra y se puede usar números; sin el uso de caracteres especiales. No se hace uso de '{}' para delimitar las funciones.                
             </div>
         </div>
         <div class="container">
@@ -45,12 +45,12 @@
             </div>
             <div class="row">
                 <div class="col-lg">
-                    <button class="btn btn-info" onclick="set()">Comprobar</button>
+                    <button class="btn btn-info" onclick="set()">Analizar</button>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-sm">
+                <div class="col-md-6">
                     <h3 class="title">Tabla de simbolos</h3>
                     <table class="table table-dark">
                         <thead>
@@ -67,30 +67,33 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-sm">
-                    <h3 class="title">Tabla de errores</h3>
-                    <table class="table table-dark">
-                        <thead>
+                <div class="col-md-6">
+                    <div>
+                         <h3 class="title">Tabla de errores</h3>
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    <th>LEXEMA</th>
+                                    <th>TOKEN ERROR</th>
+                                    <th>LINEA</th>
+                                    <th>DESCRIPCIÓN</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tokenerr">
                             <tr>
-                                <th>LEXEMA</th>
-                                <th>TOKEN ERROR</th>
-                                <th>LINEA</th>
-                                <th>Desc</th>
+                                <td></td>
+                                <td></td>
                             </tr>
-                        </thead>
-                        <tbody id="tokenerr">
-                           <tr>
-                               <td></td>
-                               <td></td>
-                           </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-sm">
-                    <h3 class="title">Token</h3>
-                    <textarea name="" id="tokens" disabled></textarea>
-                    <div class="btn" onclick="descargar()" style="color:blanchedalmond">Descargar</div>
-                </div>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <h3 class="title">Archivo de tokens</h3>
+                        <textarea name="" id="tokens" disabled></textarea>
+                        <div class="btn" onclick="descargar()" style="color:blanchedalmond">Descargar</div>
+                    </div>
+                   
+                </div>                
             </div>
         </div>
     </div>
